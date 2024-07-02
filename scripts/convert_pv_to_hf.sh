@@ -1,5 +1,5 @@
 export ORIG_MODEL_PATH={model_name_or_path}
-export MODEL_PATH={finetuned_quantized_model_pathmodel_path}
+export MODEL_PATH={finetuned_quantized_model_path}
 export CONVERTED_CHECKPOINT_PATH={converted_checkpoint_path}
 
 python convert_legacy_model_format.py\

@@ -3,7 +3,7 @@ SEQLEN={model_seq_len}                             # model-specific maximal sequ
 DATASET={dataset_name_or_path}                     # name of the dataset
 OUTPUT_PATH={tokenized_dataset_path}               # path to save the tokenized dataset
 
-CUDA_VISIBLE_DEVICES=0 HF_HOME=/mnt/LLM OMP_NUM_THREADS=16 torchrun \
+CUDA_VISIBLE_DEVICES=0 HF_HOME=$HF_DATASETS_CACHE OMP_NUM_THREADS=16 torchrun \
     --master-port 3456 \
     --nproc-per-node=1 finetune_fsdp.py \
     --base_model $TARGET_MODEL \
@@ -12,7 +12,7 @@ CUDA_VISIBLE_DEVICES=0 HF_HOME=/mnt/LLM OMP_NUM_THREADS=16 torchrun \
     --block_type LlamaDecoderLayer \
     --dataset_name=$DATASET \
     --split train \
-    --cache_dir=./cache_dir \
+    --cache_dir=$$HF_DATASETS_CACHE \
     --trust_remote_code \
     --model_seqlen=$SEQLEN \
     --preprocessing_num_workers=64 \
